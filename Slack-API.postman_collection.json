@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "a9370cfd-2f3c-435b-a4b4-1137e35e68b8",
+		"name": "Slack API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "team.info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ccd37a1d-28bb-4141-837f-c29bfc3fbd06",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Content-Type is present\", function () { // #1",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Content-Type is application/json\", function () { // #2",
+							"    pm.expect(postman.getResponseHeader(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"pm.test(\"Body is present\", function () { // #3",
+							"    pm.response.to.have.body();",
+							"});",
+							"pm.test(\"Body is a valid json\", function () { // #4",
+							"    pm.response.to.be.json;",
+							"});",
+							"pm.test(\"ok: true\", function () { // #5",
+							"    pm.expect(jsonData.ok).to.eql(true);",
+							"});",
+							"pm.test(\"team.name: ProstDev\", function () { // #6",
+							"    pm.expect(jsonData.team.name).to.eql(\"ProstDev\");",
+							"});",
+							"pm.test(\"Status code is 200\", function () { // #7",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://slack.com/api/team.info",
+					"protocol": "https",
+					"host": [
+						"slack",
+						"com"
+					],
+					"path": [
+						"api",
+						"team.info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Negative test: wrong method",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3af57e79-b0cb-4d83-9092-d29ab96336ae",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Content-Type is present\", function () { // #1",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Content-Type is application/json\", function () { // #2",
+							"    pm.expect(postman.getResponseHeader(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"pm.test(\"Body is present\", function () { // #3",
+							"    pm.response.to.have.body();",
+							"});",
+							"pm.test(\"Body is a valid json\", function () { // #4",
+							"    pm.response.to.be.json;",
+							"});",
+							"pm.test(\"ok: false\", function () { // #5",
+							"    pm.expect(jsonData.ok).to.eql(false);",
+							"});",
+							"pm.test(\"error: unknown_method\", function () { // #6",
+							"    pm.expect(jsonData.error).to.eql(\"unknown_method\");",
+							"});",
+							"pm.test(\"Status code is 200\", function () { // #7",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://slack.com/api/unexistent",
+					"protocol": "https",
+					"host": [
+						"slack",
+						"com"
+					],
+					"path": [
+						"api",
+						"unexistent"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "accessToken",
+				"value": "mytoken",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0f622e99-8d29-4f77-b7fa-5225f99e60ac",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "8e1255ec-65af-4aa4-a9b2-076a5087eb88",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
