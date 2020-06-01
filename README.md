@@ -1,4 +1,4 @@
-# postman-collections-examples
+# Postman Collections Examples
 This is a repository to keep some examples of Postman Collections.
 
 You can download a specific collection, or clone the entire repository, 
